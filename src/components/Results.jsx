@@ -39,9 +39,9 @@ export const Results = () => {
                     {title}
                   </p>
                 </a>
-                <p className="text-sm dark:text-gray-100 hover:text-gray-200 text-gray-700">
-                    {description.length > 40 ? description.substring(0,40) : description}
-                  </p>
+                {description && <p className="text-sm dark:text-gray-100 hover:text-gray-200 text-gray-700">
+                  {description.length > 40 ? description.substring(0,40) : description}
+                </p>}
               </div>
             )
           })}
@@ -72,8 +72,12 @@ export const Results = () => {
                   <p className="text-lg dark:text-blue-300 text-blue-700 ">
                     {title}
                   </p>
-
                 </a>
+                <div className="flex gap-4">
+                  <a href={source?.href} target="_blank" rel="noreferrer">
+                    {source?.href}
+                  </a>
+                </div>
               </div>
             )
           })}
@@ -85,7 +89,7 @@ export const Results = () => {
           {results.map((video, index) => {
             return (
               <div key={index} className="p-2">
-                <ReactPlayer url={video.additional_links?.[0].href} controls width="355px" height="200px"></ReactPlayer>
+                {video?.additional_links?.[0]?.href.includes('youtube') && <ReactPlayer url={video.additional_links?.[0].href} controls width="355px" height="200px"></ReactPlayer>}
               </div>
             );
           })}
